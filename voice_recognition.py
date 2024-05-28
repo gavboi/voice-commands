@@ -1,6 +1,7 @@
 import time
 import sys
 
+from playsound import playsound
 import speech_recognition as sr
 
 
@@ -51,9 +52,13 @@ while running:
                         print(f'{command["name"]}: {content}')
                         command['action'](content)
                         processed = True
+                        playsound('beep-success.wav')
                         break
                 if processed:
                     break
+            if not processed:
+                playsound('beep-none.wav')
+                print('(No command match)')
         else:
             print(f'{output}')
             
