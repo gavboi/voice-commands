@@ -13,3 +13,5 @@ Tell `name` to "write" something, and it will create a text file with that in it
 ## Notes
 
 You seem to need a not terrible microphone for it to work with any consistency.
+
+Source sound effects from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=96243)
