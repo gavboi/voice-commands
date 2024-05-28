@@ -20,6 +20,11 @@ commands.append({
     'phrases': ['write', 'write down', 'write down that', 'take a note to'],
     'action': note
 })
+commands.append({
+    'name': 'Exit',
+    'phrases': ['exit', 'stop listening'],
+    'action': lambda x: None
+})
 
 # initialize
 r = sr.Recognizer()
@@ -35,6 +40,7 @@ print('(Ready)')
 
 # loop
 while running:
+    print('(Listening)')
     with m as source:
         audio = r.listen(source)
     processed = False
@@ -48,6 +54,10 @@ while running:
             for command in commands:
                 for phrase in sorted(command['phrases'], key=len, reverse=True):
                     if output.lower().startswith(phrase):
+                        if command['name'] == 'Exit':
+                            print('(Exiting)')
+                            playsound('beep-off.wav')
+                            exit()
                         content = output[output.lower().index(phrase)+len(phrase):].strip()
                         print(f'{command["name"]}: {content}')
                         command['action'](content)
@@ -64,5 +74,3 @@ while running:
             
     except sr.UnknownValueError:
         print('(Could not understand!)')
-    finally:
-        print('(Listening)')
