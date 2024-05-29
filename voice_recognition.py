@@ -3,6 +3,10 @@ import sys
 
 from playsound import playsound
 import speech_recognition as sr
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 
 # process arg for name
@@ -10,15 +14,39 @@ name = 'computer'
 if len(sys.argv) > 1:
     name = sys.argv[1]
 
-# processing options
-commands = []
+# processing options; actions
 def note(content):
     with open(f'note-{str(time.time()).split(".")[0]}.txt', 'w') as file:
         file.write(content)
+def google(content):
+    chrome_options = Options()
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--disable-notifications')
+    chrome_options.add_argument('--incognito')
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get("https://www.google.com")
+    search_box = driver.find_element(By.NAME, 'q')
+    search_box.send_keys(content)
+    search_box.send_keys(Keys.RETURN)
+    while True:
+        try:
+            handles = driver.window_handles
+            if not handles:
+                break
+        except:
+            break
+        time.sleep(1)
+# processing options; command data
+commands = []
 commands.append({
     'name': 'Note',
     'phrases': ['write', 'write down', 'write down that', 'take a note to'],
     'action': note
+})
+commands.append({
+    'name': 'Google',
+    'phrases': ['google', 'search', 'search for', 'look up'],
+    'action': google
 })
 commands.append({
     'name': 'Exit',
