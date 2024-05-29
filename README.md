@@ -10,6 +10,12 @@ Run `voice_recognition.py [name]`. Provide `name` if you want to use another key
 #### Write a Note
 Tell `name` to "write" something, and it will create a text file with that in it.
 
+#### Google Something
+Tell `name` to "search" something, and it will Google it (using Chrome).
+
+#### Exit
+Tell `name` to "stop listening", and the script will terminate. 
+
 ## Notes
 
 You seem to need a not terrible microphone for it to work with any consistency.
