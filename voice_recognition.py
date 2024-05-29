@@ -84,18 +84,18 @@ while running:
                     if output.lower().startswith(phrase):
                         if command['name'] == 'Exit':
                             print('(Exiting)')
-                            playsound('beep-off.wav')
+                            playsound('./sounds/beep-off.wav')
                             exit()
                         content = output[output.lower().index(phrase)+len(phrase):].strip()
                         print(f'{command["name"]}: {content}')
                         command['action'](content)
                         processed = True
-                        playsound('beep-success.wav')
+                        playsound('./sounds/beep-success.wav')
                         break
                 if processed:
                     break
             if not processed:
-                playsound('beep-none.wav')
+                playsound('./sounds/beep-none.wav')
                 print('(No command match)')
         else:
             print(f'{output}')
