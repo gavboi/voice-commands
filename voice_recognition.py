@@ -40,7 +40,7 @@ def google(content):
 commands = []
 commands.append({
     'name': 'Note',
-    'phrases': ['write', 'write down', 'write down that', 'take a note to'],
+    'phrases': ['write', 'write down', 'write down that', 'take a note to', 'note down'],
     'action': note
 })
 commands.append({
